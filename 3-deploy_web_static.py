@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """create a .tgz archive from contents of the web_static"""
 from datetime import datetime
