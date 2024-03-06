@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """create a list of file from a archived files"""
-from fabric.api import task, put, run, env, local
+from fabric.api import task, put, run, env, local, sudo
 import os
 from datetime import datetime
 
@@ -31,15 +31,15 @@ def do_deploy(archive_path):
         return False
 
     put(archive_path, '/tmp/')
-    run(f'mkdir -p /data/web_static/releases/{file_name}/')
-    run(f'tar -xzf /tmp/{file_name}.tgz -C \
+    sudo(f'mkdir -p /data/web_static/releases/{file_name}/')
+    sudo(f'tar -xzf /tmp/{file_name}.tgz -C \
     /data/web_static/releases/{file_name}/')
-    run(f'rm /tmp/{file_name}.tgz')
-    run(f'mv /data/web_static/releases/{file_name}/web_static/* \
+    sudo(f'rm /tmp/{file_name}.tgz')
+    sudo(f'mv /data/web_static/releases/{file_name}/web_static/* \
     /data/web_static/releases/{file_name}/')
-    run(f'rm -rf /data/web_static/releases/{file_name}/web_static')
-    run('rm -rf /data/web_static/current')
-    run(f'ln -s /data/web_static/releases/{file_name}/ \
+    sudo(f'rm -rf /data/web_static/releases/{file_name}/web_static')
+    sudo('rm -rf /data/web_static/current')
+    sudo(f'ln -s /data/web_static/releases/{file_name}/ \
     /data/web_static/current')
     print('New version deployed!')
     return True
