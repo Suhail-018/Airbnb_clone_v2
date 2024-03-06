@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""create a .tgz archive from contents of the web_static"""
+"""create a list of file from a archived files"""
 from fabric.api import task, put, run, env, local
 import os
 from datetime import datetime
@@ -10,7 +10,7 @@ env.hosts = ['54.90.31.60', '100.25.151.235']
 
 @task
 def do_pack():
-    """a pack web_static folder"""
+    """a pack web_static folder to archive"""
     try:
         cur_date = datetime.now().strftime('%Y%m%d%H%M%S')
         arch = f'web_static_{cur_date}.tgz'
