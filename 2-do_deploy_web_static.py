@@ -10,6 +10,7 @@ env.hosts = ['54.90.31.60', '100.25.151.235']
 
 @task
 def do_pack():
+
     """a pack web_static folder to archive"""
     try:
         cur_date = datetime.now().strftime('%Y%m%d%H%M%S')
@@ -23,6 +24,7 @@ def do_pack():
 
 @task
 def do_deploy(archive_path):
+
     """the fun willdistributes an archive to a or urweb servers"""
     file_name = archive_path.split('/')[-1].split('.')[0]
     if not os.path.exists(archive_path):
@@ -30,8 +32,8 @@ def do_deploy(archive_path):
 
     put(archive_path, '/tmp/')
     run(f'mkdir -p /data/web_static/releases/{file_name}/')
-    run(f'tar -xzf /tmp/{file_name}.tgz -C /data/web_static/releases/
-            {file_name}/')
+    run(f'tar -xzf /tmp/{file_name}.tgz -C /data/web_static/releases/\
+    {file_name}/')
     run(f'rm /tmp/{file_name}.tgz')
     run(f'mv /data/web_static/releases/{file_name}/web_static/* \
     /data/web_static/releases/{file_name}/')
