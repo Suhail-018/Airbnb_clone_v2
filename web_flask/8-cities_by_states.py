@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3
 """a list of states on HTML states_list"""
 
 from models import storage
@@ -15,7 +15,8 @@ def cities_by_states():
     slist = sorted(storage.all(
         State).values(), key=lambda x: x.name)
     # sort cities by name from a to z
-   
+   for s in slist:
+       s.cities.sort(key=lambda x: x.name)
     return render_template("8-cities_by_states.html", sorted_states_list=slist)
 
 
